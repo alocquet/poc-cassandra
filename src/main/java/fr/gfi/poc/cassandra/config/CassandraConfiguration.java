@@ -1,5 +1,7 @@
 package fr.gfi.poc.cassandra.config;
 
+import com.datastax.driver.core.AuthProvider;
+import com.datastax.driver.core.PlainTextAuthProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.SchemaAction;
@@ -16,6 +18,12 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Value("${cassandra.port:9042}")
     private int cassandraPort;
+
+    @Value("${cassandra.user:}")
+    private String cassandraUser;
+
+    @Value("${cassandra.password:}")
+    private String cassandraPassword;
 
     @Override
     protected List<String> getStartupScripts() {
@@ -38,6 +46,11 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
     @Override
     protected int getPort() {
         return cassandraPort;
+    }
+
+    @Override
+    protected AuthProvider getAuthProvider() {
+        return new PlainTextAuthProvider(cassandraUser, cassandraPassword);
     }
 
     @Override
