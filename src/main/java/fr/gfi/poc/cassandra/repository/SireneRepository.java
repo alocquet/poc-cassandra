@@ -16,4 +16,8 @@ public interface SireneRepository extends CassandraRepository<Sirene> {
     @Query("SELECT * FROM Sirene LIMIT 100")
     List<Sirene> findAll();
 
+    Sirene findBySiren(String siren);
+
+    @Query("SELECT * FROM Sirene WHERE numInterne = ?0 ALLOW FILTERING")
+    List<Sirene> findByNumInterne(String numInterne);
 }
