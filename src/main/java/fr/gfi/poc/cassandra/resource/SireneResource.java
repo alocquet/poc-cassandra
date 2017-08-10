@@ -2,6 +2,7 @@ package fr.gfi.poc.cassandra.resource;
 
 import fr.gfi.poc.cassandra.domain.Sirene;
 import fr.gfi.poc.cassandra.repository.SireneRepository;
+import fr.gfi.poc.cassandra.repository.SireneRestRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.cassandra.repository.support.BasicMapId;
@@ -22,6 +23,9 @@ public class SireneResource {
     @NonNull
     private final SireneRepository repo;
 
+    @NonNull
+    private final SireneRestRepository repoRest;
+
     /**
      * find all sirene
      *
@@ -34,6 +38,12 @@ public class SireneResource {
             return repo.findByNumInterne(numInterne);
         }
         return repo.findAll();
+    }
+
+    @GET
+    @Path("/loop")
+    public Iterable<Sirene> findAllLoop(){
+        return repoRest.findAll();
     }
 
     /**
