@@ -22,7 +22,9 @@ docker exec cassandra cqlsh -e "COPY poc.sirene (siren, numinterne, adressenorml
 ```
 
 # Test local
-ouvrir http://localhost:8080/api/sirene
+* find all : http://localhost:8080/api/sirene
+* search : http://localhost:8080/api/sirene?numinterne=00017
+* find one : http://localhost:8080/api/sirene/356000000
 
 Au démarrage un dump des entrées est fait dans la console et permet de valider  toute la chaine :
  - fonctionnalité de client REST via Feign
